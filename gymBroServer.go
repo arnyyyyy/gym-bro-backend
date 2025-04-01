@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 
 	"time"
 )
@@ -92,6 +93,16 @@ func (c *Controller) loadData() error {
 	return nil
 }
 
+func (c *Controller) generateNewUserID() int64 {
+	var maxID int64
+	for _, user := range c.storage.Users {
+		if user.ID > maxID {
+			maxID = user.ID
+		}
+	}
+	return maxID + 1
+}
+
 func (c *Controller) saveData() error {
 
 	data, err := json.MarshalIndent(c.storage, "", "  ")
@@ -117,38 +128,82 @@ func (c *Controller) AddProfile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	file, handler, err := r.FormFile("image")
-	if err != nil {
-		http.Error(w, "Image is required", http.StatusBadRequest)
-		return
-	}
-	defer file.Close()
-
-	imagePath := filepath.Join(c.imageDir, handler.Filename)
-	dst, err := os.Create(imagePath)
-	if err != nil {
-		http.Error(w, "Failed to save image", http.StatusInternalServerError)
-		return
-	}
-	defer dst.Close()
-
-	if _, err := io.Copy(dst, file); err != nil {
-		http.Error(w, "Failed to save image", http.StatusInternalServerError)
-		return
+	// Получаем ID из формы (может быть пустым для нового пользователя)
+	var userID int64
+	if idStr := r.FormValue("id"); idStr != "" {
+		var err error
+		userID, err = strconv.ParseInt(idStr, 10, 64)
+		if err != nil {
+			http.Error(w, "Invalid user ID", http.StatusBadRequest)
+			return
+		}
 	}
 
-	user := User{
-		ID:        int64(len(c.storage.Users) + 1),
-		ImageURL:  "/images/" + handler.Filename,
-		Time:      r.FormValue("time"),
-		Day:       r.FormValue("day"),
-		TextInfo:  r.FormValue("textInfo"),
-		TrainType: r.FormValue("trainType"),
+	var user User
+	var imageUpdated bool
+
+	// Обработка изображения
+	if file, handler, err := r.FormFile("image"); err == nil {
+		defer file.Close()
+
+		imagePath := filepath.Join(c.imageDir, handler.Filename)
+		dst, err := os.Create(imagePath)
+		if err != nil {
+			http.Error(w, "Failed to save image", http.StatusInternalServerError)
+			return
+		}
+		defer dst.Close()
+
+		if _, err := io.Copy(dst, file); err != nil {
+			http.Error(w, "Failed to save image", http.StatusInternalServerError)
+			return
+		}
+
+		user.ImageURL = "/images/" + handler.Filename
+		imageUpdated = true
 	}
 
-	c.storage.Users = append(c.storage.Users, user)
+	// Заполняем данные пользователя
+	user.ID = userID
+	user.Time = r.FormValue("time")
+	user.Day = r.FormValue("day")
+	user.TextInfo = r.FormValue("textInfo")
+	user.TrainType = r.FormValue("trainType")
+
+	found := false
+	// Ищем пользователя для обновления
+	for i, u := range c.storage.Users {
+		if u.ID == userID {
+			// Обновляем существующего пользователя
+			if imageUpdated {
+				c.storage.Users[i].ImageURL = user.ImageURL
+			}
+			c.storage.Users[i].Time = user.Time
+			c.storage.Users[i].Day = user.Day
+			c.storage.Users[i].TextInfo = user.TextInfo
+			c.storage.Users[i].TrainType = user.TrainType
+			user = c.storage.Users[i]
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		// Создаем нового пользователя
+		if !imageUpdated {
+			user.ImageURL = "/images/default.jpg"
+		}
+		if user.ID == 0 {
+			// Генерируем новый ID, если не был передан
+			user.ID = c.generateNewUserID()
+		}
+		c.storage.Users = append(c.storage.Users, user)
+	}
+
 	if err := c.saveData(); err != nil {
 		log.Printf("Failed to save data: %v", err)
+		http.Error(w, "Failed to save data", http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
