@@ -1,0 +1,78 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "imageUrl": "/images/cat.jpeg",
+      "time": "10:00",
+      "day": "Пн",
+      "textInfo": "Силовая тренировка",
+      "trainType": "Силовая"
+    },
+    {
+      "id": 2,
+      "imageUrl": "/images/dog.jpeg",
+      "time": "12:00",
+      "day": "Вт",
+      "textInfo": "Кардио нагрузка",
+      "trainType": "Кардио"
+    },
+    {
+      "id": 3,
+      "imageUrl": "/images/myles.jpeg",
+      "time": "15:00",
+      "day": "Ср",
+      "textInfo": "Йога для начинающих",
+      "trainType": "Йога"
+    },
+    {
+      "id": 4,
+      "imageUrl": "/images/1000000047.jpg",
+      "time": "аии",
+      "day": "вре",
+      "textInfo": "вааа",
+      "trainType": "кккк"
+    },
+    {
+      "id": 5,
+      "imageUrl": "/images/1000000047.jpg",
+      "time": "аии",
+      "day": "вре",
+      "textInfo": "вааа",
+      "trainType": "кккк"
+    },
+    {
+      "id": 6,
+      "imageUrl": "/images/1000000047.jpg",
+      "time": "аии",
+      "day": "вре",
+      "textInfo": "вааа",
+      "trainType": "кккк"
+    },
+    {
+      "id": 7,
+      "imageUrl": "/images/1000000047.jpg",
+      "time": "амогус",
+      "day": "вре",
+      "textInfo": "вааа",
+      "trainType": "кккк"
+    },
+    {
+      "id": 8,
+      "imageUrl": "/images/image_picker_B6030640-9EAB-4461-9CB6-2298558B0928-41753-000003A5362746A9.jpg",
+      "time": "2100",
+      "day": "12",
+      "textInfo": "432ап",
+      "trainType": "рука"
+    },
+    {
+      "id": 9,
+      "imageUrl": "/images/image_picker_B6030640-9EAB-4461-9CB6-2298558B0928-41753-000003A5362746A9.jpg",
+      "time": "2100",
+      "day": "12",
+      "textInfo": "432ап",
+      "trainType": "рука"
+    }
+  ],
+  "swipes": null,
+  "matches": null
+}
