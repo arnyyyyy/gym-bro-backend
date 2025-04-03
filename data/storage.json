@@ -6,9 +6,9 @@
       "imageUrl": "/images/cat.jpeg",
       "time": "10:00",
       "day": "Пн",
-      "textInfo": "Силовая тренировка",
+      "textInfo": "Я кот",
       "trainType": "Силовая",
-      "contact": "tg: yungeiren"
+      "contact": "tg: cateiren"
     },
     {
       "firebaseUid": "firebase_uid_DOG",
@@ -16,215 +16,35 @@
       "imageUrl": "/images/dog.jpeg",
       "time": "12:00",
       "day": "Вт",
-      "textInfo": "Кардио нагрузка",
+      "textInfo": "Я СОБАКА!",
       "trainType": "Кардио",
-      "contact": "tg: yungeiren"
-    },
-    {
-      "firebaseUid": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "name": "амогус",
-      "imageUrl": "/images/1000000048.jpg",
-      "time": "амогус.йййййй",
-      "day": "вре",
-      "textInfo": "вааа",
-      "trainType": "ккккВВВВВВ",
-      "contact": "tg: yungeiren"
+      "contact": "tg: doggeiren"
     },
     {
       "firebaseUid": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
       "name": "Амогус Лютый",
-      "imageUrl": "/images/Стенвейк, Хендрик ван Младший (ок. 1580-до 1649) Внутренний вид притвора готического храма 1630-е гг._1734807522290.jpg",
+      "imageUrl": "/images/507e0527-ebc4-456b-91b3-9dcb0e9387fc818598935.jpg",
       "time": "282929",
       "day": "28388383",
       "textInfo": "хз",
       "trainType": "ножки",
-      "contact": "yungeiren"
+      "contact": "yungeiren "
+    },
+    {
+      "firebaseUid": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "name": "пчел",
+      "imageUrl": "/images/1000000043.jpg",
+      "time": "амогус.йййййй",
+      "day": "вре",
+      "textInfo": "вааа",
+      "trainType": "ккккВВВВВВ",
+      "contact": "vk: amogus"
     }
   ],
   "swipes": [
     {
       "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "isLike": true
-    },
-    {
-      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
-      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "isLike": true
-    },
-    {
-      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
-      "targetId": "firebase_uid_CAT",
-      "isLike": true
-    },
-    {
-      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
-      "targetId": "firebase_uid_DOG",
-      "isLike": true
-    },
-    {
-      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
-      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "targetId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
       "isLike": true
     },
     {
@@ -234,18 +54,37 @@
     },
     {
       "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "isLike": true
+    },
+    {
+      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "isLike": true
+    },
+    {
+      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
       "targetId": "firebase_uid_CAT",
+      "isLike": true
+    },
+    {
+      "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "targetId": "firebase_uid_DOG",
       "isLike": true
     }
   ],
   "matches": [
     {
-      "user1Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
-      "user2Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2"
+      "user1Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "user2Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3"
     },
     {
       "user1Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
-      "user2Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3"
+      "user2Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2"
+    },
+    {
+      "user1Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "user2Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2"
     }
   ]
 }

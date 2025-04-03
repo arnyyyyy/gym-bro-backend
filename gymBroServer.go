@@ -301,7 +301,15 @@ func (c *Controller) Swipe(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if req.IsLike {
+	swipeExists := false
+	for _, swipe := range c.storage.Swipes {
+		if swipe.SwiperID == req.SwiperID && swipe.TargetID == req.TargetID {
+			swipeExists = true
+			break
+		}
+	}
+
+	if req.IsLike && !swipeExists {
 		c.storage.Swipes = append(c.storage.Swipes, Swipe{
 			SwiperID: req.SwiperID,
 			TargetID: req.TargetID,
