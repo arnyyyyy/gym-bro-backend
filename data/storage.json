@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "firebaseUid": "firebase_uid_CAT",
       "imageUrl": "/images/cat.jpeg",
       "time": "10:00",
       "day": "Пн",
@@ -9,7 +9,7 @@
       "trainType": "Силовая"
     },
     {
-      "id": 2,
+      "firebaseUid": "firebase_uid_DOG",
       "imageUrl": "/images/dog.jpeg",
       "time": "12:00",
       "day": "Вт",
@@ -17,30 +17,86 @@
       "trainType": "Кардио"
     },
     {
-      "id": 3,
-      "imageUrl": "/images/myles.jpeg",
-      "time": "15:00",
-      "day": "Ср",
-      "textInfo": "Йога для начинающих",
-      "trainType": "Йога"
-    },
-    {
-      "id": 8,
-      "imageUrl": "/images/image_picker_B6030640-9EAB-4461-9CB6-2298558B0928-41753-000003A5362746A9.jpg",
-      "time": "2100",
-      "day": "12",
-      "textInfo": "432ап",
-      "trainType": "рука"
-    },
-    {
-      "id": 12,
+      "firebaseUid": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
       "imageUrl": "/images/1000000047.jpg",
       "time": "амогус.йййййй",
       "day": "вре",
       "textInfo": "вааа",
       "trainType": "кккк"
+    },
+    {
+      "firebaseUid": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "imageUrl": "/images/Стенвейк, Хендрик ван Младший (ок. 1580-до 1649) Внутренний вид притвора готического храма 1630-е гг._1734807522290.jpg",
+      "time": "282929",
+      "day": "28388383",
+      "textInfo": "хз",
+      "trainType": "ножки"
     }
   ],
-  "swipes": null,
-  "matches": null
+  "swipes": [
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "firebase_uid_CAT",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "firebase_uid_CAT",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "isLike": true
+    }
+  ],
+  "matches": [
+    {
+      "user1Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "user2Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2"
+    },
+    {
+      "user1Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "user2Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3"
+    },
+    {
+      "user1Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "user2Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2"
+    }
+  ]
 }

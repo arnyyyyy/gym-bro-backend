@@ -10,37 +10,32 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"strconv"
-
-	"time"
 )
 
 type User struct {
-	ID        int64  `json:"id"`
-	ImageURL  string `json:"imageUrl"`
-	Time      string `json:"time"`
-	Day       string `json:"day"`
-	TextInfo  string `json:"textInfo"`
-	TrainType string `json:"trainType"`
+	FirebaseUID string `json:"firebaseUid"`
+	ImageURL    string `json:"imageUrl"`
+	Time        string `json:"time"`
+	Day         string `json:"day"`
+	TextInfo    string `json:"textInfo"`
+	TrainType   string `json:"trainType"`
 }
 
 type Swipe struct {
-	SwiperID  int64 `json:"swiperId"`
-	TargetID  int64 `json:"targetId"`
-	IsLike    bool  `json:"isLike"`
-	Timestamp int64 `json:"timestamp"`
+	SwiperID string `json:"swiperId"`
+	TargetID string `json:"targetId"`
+	IsLike   bool   `json:"isLike"`
 }
 
 type Match struct {
-	User1ID   int64 `json:"user1Id"`
-	User2ID   int64 `json:"user2Id"`
-	Timestamp int64 `json:"timestamp"`
+	User1ID string `json:"user1Id"`
+	User2ID string `json:"user2Id"`
 }
 
 type SwipeRequest struct {
-	SwiperID int64 `json:"swiperId"`
-	TargetID int64 `json:"targetId"`
-	IsLike   bool  `json:"isLike"`
+	SwiperID string `json:"swiperId"`
+	TargetID string `json:"targetId"`
+	IsLike   bool   `json:"isLike"`
 }
 
 type Storage struct {
@@ -70,9 +65,22 @@ func NewController(dataFile, imageDir string) *Controller {
 
 		c.storage = Storage{
 			Users: []User{
-				{ID: 1, ImageURL: "/images/cat.jpeg", Time: "1000:00", Day: "Пн", TextInfo: "Силовая тренировка", TrainType: "Силовая"},
-				{ID: 2, ImageURL: "/images/dog.jpeg", Time: "12:00", Day: "Вт", TextInfo: "Кардио нагрузка", TrainType: "Кардио"},
-				{ID: 3, ImageURL: "/images/myles.jpeg", Time: "15:00", Day: "Ср", TextInfo: "Йога для начинающих", TrainType: "Йога"},
+				{
+					FirebaseUID: "firebase_uid_AAAAACAT",
+					ImageURL:    "/images/cat.jpeg",
+					Time:        "10:00",
+					Day:         "Пн",
+					TextInfo:    "Силовая тренировка",
+					TrainType:   "Силовая",
+				},
+				{
+					FirebaseUID: "firebase_uid_AAAADOG",
+					ImageURL:    "/images/dog.jpeg",
+					Time:        "12:00",
+					Day:         "Вт",
+					TextInfo:    "Кардио нагрузка",
+					TrainType:   "Кардио",
+				},
 			},
 		}
 	}
@@ -93,18 +101,7 @@ func (c *Controller) loadData() error {
 	return nil
 }
 
-func (c *Controller) generateNewUserID() int64 {
-	var maxID int64
-	for _, user := range c.storage.Users {
-		if user.ID > maxID {
-			maxID = user.ID
-		}
-	}
-	return maxID + 1
-}
-
 func (c *Controller) saveData() error {
-
 	data, err := json.MarshalIndent(c.storage, "", "  ")
 	if err != nil {
 		return fmt.Errorf("marshaling data: %w", err)
@@ -128,21 +125,15 @@ func (c *Controller) AddProfile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Получаем ID из формы (может быть пустым для нового пользователя)
-	var userID int64
-	if idStr := r.FormValue("id"); idStr != "" {
-		var err error
-		userID, err = strconv.ParseInt(idStr, 10, 64)
-		if err != nil {
-			http.Error(w, "Invalid user ID", http.StatusBadRequest)
-			return
-		}
+	firebaseUID := r.FormValue("firebaseUid")
+	if firebaseUID == "" {
+		http.Error(w, "Firebase UID is required", http.StatusBadRequest)
+		return
 	}
 
 	var user User
 	var imageUpdated bool
 
-	// Обработка изображения
 	if file, handler, err := r.FormFile("image"); err == nil {
 		defer file.Close()
 
@@ -163,18 +154,15 @@ func (c *Controller) AddProfile(w http.ResponseWriter, r *http.Request) {
 		imageUpdated = true
 	}
 
-	// Заполняем данные пользователя
-	user.ID = userID
+	user.FirebaseUID = firebaseUID
 	user.Time = r.FormValue("time")
 	user.Day = r.FormValue("day")
 	user.TextInfo = r.FormValue("textInfo")
 	user.TrainType = r.FormValue("trainType")
 
 	found := false
-	// Ищем пользователя для обновления
 	for i, u := range c.storage.Users {
-		if u.ID == userID {
-			// Обновляем существующего пользователя
+		if u.FirebaseUID == firebaseUID {
 			if imageUpdated {
 				c.storage.Users[i].ImageURL = user.ImageURL
 			}
@@ -189,13 +177,8 @@ func (c *Controller) AddProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if !found {
-		// Создаем нового пользователя
 		if !imageUpdated {
 			user.ImageURL = "/images/default.jpg"
-		}
-		if user.ID == 0 {
-			// Генерируем новый ID, если не был передан
-			user.ID = c.generateNewUserID()
 		}
 		c.storage.Users = append(c.storage.Users, user)
 	}
@@ -208,26 +191,6 @@ func (c *Controller) AddProfile(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(user)
-}
-
-func main() {
-	if err := os.MkdirAll("data", 0755); err != nil {
-		log.Fatalf("Failed to create data directory: %v", err)
-	}
-
-	controller := NewController("data/storage.json", "data/images")
-
-	http.Handle("/images/", http.StripPrefix("/images/",
-		http.FileServer(http.Dir(controller.imageDir))))
-
-	http.HandleFunc("/api/users", controller.GetUsers)
-	http.HandleFunc("/api/next-user/", controller.GetNextUser)
-	http.HandleFunc("/api/swipe", controller.Swipe)
-	http.HandleFunc("/api/matches/", controller.GetMatches)
-	http.HandleFunc("/api/profiles", controller.AddProfile)
-
-	log.Println("Server starting on :8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func (c *Controller) GetUsers(w http.ResponseWriter, r *http.Request) {
@@ -247,27 +210,22 @@ func (c *Controller) GetNextUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userID := r.URL.Path[len("/api/next-user/"):]
-	if userID == "" {
+	userIDStr := r.URL.Path[len("/api/next-user/"):]
+	if userIDStr == "" {
 		http.Error(w, "User ID is required", http.StatusBadRequest)
 		return
 	}
 
-	var id int64
-	_, err := fmt.Sscanf(userID, "%d", &id)
-	if err != nil {
-		http.Error(w, "Invalid user ID", http.StatusBadRequest)
-		return
-	}
+	userID := userIDStr
 
 	for _, user := range c.storage.Users {
-		// if user.ID == id {
-		// 	continue
-		// }
+		if user.FirebaseUID == userID {
+			continue
+		}
 
 		swiped := false
 		for _, swipe := range c.storage.Swipes {
-			if swipe.SwiperID == id && swipe.TargetID == user.ID {
+			if swipe.SwiperID == userID && swipe.TargetID == user.FirebaseUID {
 				swiped = true
 				break
 			}
@@ -289,22 +247,15 @@ func (c *Controller) GetMatches(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userID := r.URL.Path[len("/api/matches/"):]
-	if userID == "" {
+	userIDStr := r.URL.Path[len("/api/matches/"):]
+	if userIDStr == "" {
 		http.Error(w, "User ID is required", http.StatusBadRequest)
-		return
-	}
-
-	var id int64
-	_, err := fmt.Sscanf(userID, "%d", &id)
-	if err != nil {
-		http.Error(w, "Invalid user ID", http.StatusBadRequest)
 		return
 	}
 
 	var userMatches []Match
 	for _, match := range c.storage.Matches {
-		if match.User1ID == id || match.User2ID == id {
+		if match.User1ID == userIDStr || match.User2ID == userIDStr {
 			userMatches = append(userMatches, match)
 		}
 	}
@@ -327,10 +278,10 @@ func (c *Controller) Swipe(w http.ResponseWriter, r *http.Request) {
 
 	var swiperExists, targetExists bool
 	for _, user := range c.storage.Users {
-		if user.ID == req.SwiperID {
+		if user.FirebaseUID == req.SwiperID {
 			swiperExists = true
 		}
-		if user.ID == req.TargetID {
+		if user.FirebaseUID == req.TargetID {
 			targetExists = true
 		}
 	}
@@ -340,12 +291,13 @@ func (c *Controller) Swipe(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	c.storage.Swipes = append(c.storage.Swipes, Swipe{
-		SwiperID:  req.SwiperID,
-		TargetID:  req.TargetID,
-		IsLike:    req.IsLike,
-		Timestamp: time.Now().UnixMilli(),
-	})
+	if req.IsLike {
+		c.storage.Swipes = append(c.storage.Swipes, Swipe{
+			SwiperID: req.SwiperID,
+			TargetID: req.TargetID,
+			IsLike:   req.IsLike,
+		})
+	}
 
 	isMatch := false
 	if req.IsLike {
@@ -360,12 +312,15 @@ func (c *Controller) Swipe(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if isMatch {
-		user1ID := min(req.SwiperID, req.TargetID)
-		user2ID := max(req.SwiperID, req.TargetID)
+		id1, id2 := req.SwiperID, req.TargetID
+		if id1 > id2 {
+			id1, id2 = id2, id1
+		}
 
 		matchExists := false
 		for _, match := range c.storage.Matches {
-			if match.User1ID == user1ID && match.User2ID == user2ID {
+			if (match.User1ID == id1 && match.User2ID == id2) ||
+				(match.User1ID == id2 && match.User2ID == id1) {
 				matchExists = true
 				break
 			}
@@ -373,10 +328,15 @@ func (c *Controller) Swipe(w http.ResponseWriter, r *http.Request) {
 
 		if !matchExists {
 			c.storage.Matches = append(c.storage.Matches, Match{
-				User1ID:   user1ID,
-				User2ID:   user2ID,
-				Timestamp: time.Now().UnixMilli(),
+				User1ID: id1,
+				User2ID: id2,
 			})
+
+			if err := c.saveData(); err != nil {
+				log.Printf("Failed to save data: %v", err)
+				http.Error(w, "Internal server error", http.StatusInternalServerError)
+				return
+			}
 		}
 	}
 
@@ -408,4 +368,24 @@ func (c *Controller) Swipe(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewEncoder(w).Encode(response); err != nil {
 		log.Printf("Failed to encode response: %v", err)
 	}
+}
+
+func main() {
+	if err := os.MkdirAll("data", 0755); err != nil {
+		log.Fatalf("Failed to create data directory: %v", err)
+	}
+
+	controller := NewController("data/storage.json", "data/images")
+
+	http.Handle("/images/", http.StripPrefix("/images/",
+		http.FileServer(http.Dir(controller.imageDir))))
+
+	http.HandleFunc("/api/users", controller.GetUsers)
+	http.HandleFunc("/api/next-user/", controller.GetNextUser)
+	http.HandleFunc("/api/swipe", controller.Swipe)
+	http.HandleFunc("/api/matches/", controller.GetMatches)
+	http.HandleFunc("/api/profiles", controller.AddProfile)
+
+	log.Println("Server starting on :8080...")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
