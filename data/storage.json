@@ -17,9 +17,8 @@
       "time": "12:00",
       "day": "Вт",
       "textInfo": "Кардио нагрузка",
-      "trainType": "Кардио",     
+      "trainType": "Кардио",
       "contact": "tg: yungeiren"
-
     },
     {
       "firebaseUid": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
@@ -30,6 +29,16 @@
       "textInfo": "вааа",
       "trainType": "ккккВВВВВВ",
       "contact": "tg: yungeiren"
+    },
+    {
+      "firebaseUid": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "name": "Амогус Лютый",
+      "imageUrl": "/images/Стенвейк, Хендрик ван Младший (ок. 1580-до 1649) Внутренний вид притвора готического храма 1630-е гг._1734807522290.jpg",
+      "time": "282929",
+      "day": "28388383",
+      "textInfo": "хз",
+      "trainType": "ножки",
+      "contact": "yungeiren"
     }
   ],
   "swipes": [
@@ -187,12 +196,56 @@
       "swiperId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
       "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
       "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "firebase_uid_CAT",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "firebase_uid_DOG",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "firebase_uid_CAT",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "firebase_uid_DOG",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "isLike": true
+    },
+    {
+      "swiperId": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "targetId": "firebase_uid_CAT",
+      "isLike": true
     }
   ],
   "matches": [
     {
       "user1Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2",
       "user2Id": "SdV4SPUpKiMStjTj2BGxOlT6ZRk2"
+    },
+    {
+      "user1Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3",
+      "user2Id": "Pj13yxuEi0h3mi9L4loJSPx6E6H3"
     }
   ]
 }
