@@ -14,11 +14,13 @@ import (
 
 type User struct {
 	FirebaseUID string `json:"firebaseUid"`
+	Name        string `json:"name"`
 	ImageURL    string `json:"imageUrl"`
 	Time        string `json:"time"`
 	Day         string `json:"day"`
 	TextInfo    string `json:"textInfo"`
 	TrainType   string `json:"trainType"`
+	Contact     string `json:"contact"`
 }
 
 type Swipe struct {
@@ -67,19 +69,23 @@ func NewController(dataFile, imageDir string) *Controller {
 			Users: []User{
 				{
 					FirebaseUID: "firebase_uid_AAAAACAT",
+					Name:        "KOT",
 					ImageURL:    "/images/cat.jpeg",
 					Time:        "10:00",
 					Day:         "Пн",
 					TextInfo:    "Силовая тренировка",
 					TrainType:   "Силовая",
+					Contact:     "tg: yungeiren",
 				},
 				{
 					FirebaseUID: "firebase_uid_AAAADOG",
+					Name:        "DOG",
 					ImageURL:    "/images/dog.jpeg",
 					Time:        "12:00",
 					Day:         "Вт",
 					TextInfo:    "Кардио нагрузка",
 					TrainType:   "Кардио",
+					Contact:     "tg: yungeiren",
 				},
 			},
 		}
@@ -155,10 +161,12 @@ func (c *Controller) AddProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user.FirebaseUID = firebaseUID
+	user.Name = r.FormValue("name")
 	user.Time = r.FormValue("time")
 	user.Day = r.FormValue("day")
 	user.TextInfo = r.FormValue("textInfo")
 	user.TrainType = r.FormValue("trainType")
+	user.Contact = r.FormValue("contact")
 
 	found := false
 	for i, u := range c.storage.Users {
@@ -166,10 +174,12 @@ func (c *Controller) AddProfile(w http.ResponseWriter, r *http.Request) {
 			if imageUpdated {
 				c.storage.Users[i].ImageURL = user.ImageURL
 			}
+			c.storage.Users[i].Name = user.Name
 			c.storage.Users[i].Time = user.Time
 			c.storage.Users[i].Day = user.Day
 			c.storage.Users[i].TextInfo = user.TextInfo
 			c.storage.Users[i].TrainType = user.TrainType
+			c.storage.Users[i].Contact = user.Contact
 			user = c.storage.Users[i]
 			found = true
 			break
